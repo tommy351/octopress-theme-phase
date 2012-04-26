@@ -1,0 +1,21 @@
+<header>
+  {% if index %}
+  <h1 class="title"><a href="{{ root_url }}{{ post.url }}">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</a></h1>
+  {% else %}
+  <h1 class="title">{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
+  {% endif %}
+  {% include post/date.html %}
+</header>
+<div class="entry">
+  {% if index %}
+    {{ content | excerpt }}
+  {% else %}
+    {{ content }}
+  {% endif %}
+  <footer>
+    {% include post/categories.html %}
+    {% if site.disqus_short_name and post.comments == true and site.disqus_show_comment_count == true %}
+      <a class="comment" href="{{ root_url }}{{ post.url }}#disqus_thread">留言</a>
+    {% endif %}
+  </footer>
+</div>

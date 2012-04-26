@@ -1,0 +1,12 @@
+---
+layout: default
+---
+
+<section id="error">
+    <h1 class="title">404</h1>
+    <p>What are you looking for?</p>
+    <form class="search" action="{{ site.simple_search }}" method="get">
+        <input type="text" name="q" results="0">
+        <input type="hidden" name="q" value="site:{{ site.url | shorthand_url }}">
+    </form>
+</section>
