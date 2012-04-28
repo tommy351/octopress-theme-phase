@@ -9,13 +9,20 @@
 <div class="entry">
   {% if index %}
     {{ content | excerpt }}
+    {% capture excerpted %}{{ content | has_excerpt }}{% endcapture %}
+    {% if excerpted == 'true' %}<a href="{{ root_url }}{{ post.url }}" class="more-link">{{ site.excerpt_link }}</a>{% endif %}
   {% else %}
     {{ content }}
+    {% unless index %}
+      {% include post/sharing.html %}
+    {% endunless %}
   {% endif %}
   <footer>
     {% include post/categories.html %}
-    {% if site.disqus_short_name and post.comments == true and site.disqus_show_comment_count == true %}
-      <a class="comment" href="{{ root_url }}{{ post.url }}#disqus_thread">留言</a>
+    {% if site.disqus_short_name and site.disqus_show_comment_count == true %}
+    	{% if post.comments == true or page.comments == true %}
+    	<a class="comment" href="{{ root_url }}{{ post.url }}#disqus_thread">留言</a>
+    	{% endif %}
     {% endif %}
   </footer>
 </div>

@@ -1,0 +1,4 @@
+<nav id="pagenavi">
+	{% if paginator.previous_page %}<a href="{{paginator.previous_page}}" class="prev alignleft">Prev</a>{% endif %}
+	{% if paginator.next_page %}<a href="{{paginator.next_page}}" class="next alignright">Next</a>{% endif %}
+</nav>
