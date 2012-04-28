@@ -193,6 +193,17 @@ article{
 		iframe{
 			border: none;
 		}
+		.caption{
+			color: $color-meta;
+			display: block;
+			font-size: 0.9em;
+			margin-top: 5px;
+			&:before{
+				font-family: $font-icon;
+				content: "\f040";
+				padding-right: 10px;
+			}
+		}
 		.video-container{
 			position: relative;
 			padding-bottom: 56.25%;
