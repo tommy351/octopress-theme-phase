@@ -3,6 +3,14 @@ layout: default
 title: 文章彙整
 ---
 
+<header id="archive-header">
+	<h1 class="alignleft">Archives</h1>
+	<form action="{{ site.simple_search }}" class="search alignright" method="get">
+		<input type="text" name="q" results="0" placeholder="Search">
+		<input type="hidden" name="q" value="site:{{ site.url | shorthand_url }}">
+	</form>
+</header>
+
 {% for post in site.posts reverse %}
 	{% capture date %}{{ post.date }}{% endcapture %}
 	{% capture this_year %}{{ date | date: "%Y" }}{% endcapture %}

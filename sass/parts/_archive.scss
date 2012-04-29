@@ -1,26 +1,23 @@
-/*
-.archive{
-	margin-bottom: 0;
-	header{
-		time{
-			.year{
-				font-size: 2em;
-				&:after{
-					content: "′";
-					font-size: 0.9em;
-				}
-			}
+#archive-header{
+	height: 2em;
+	margin-bottom: 50px;
+	h1{
+		color: rgba(255,255,255,0.7);
+		font-family: $font-title;
+		font-weight: normal;
+		line-height: 1;
+	}
+	.search{
+		input[type="text"]{
+			background: rgba(0,0,0,0.3);
+			border: none;
+			color: rgba(255,255,255,0.7);
+			font: 0.9em $font-title;
+			padding: 7px 12px;
+			width: 150px;
 		}
 	}
-	footer{
-		border-left: 1px solid #ccc;
-		color: $color-meta;
-		font-size: 0.9em;
-		margin-left: $meta-width + 20*2px;
-		padding: 0 20px 15px;
-	}
 }
-*/
 .archives{
 	background: #fff;
 	border: 1px solid #ddd;
