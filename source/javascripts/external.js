@@ -1,7 +1,7 @@
 (function($){
 	var host = location.host;
 
-	$('a').on('click', function(e){
+	$('body').on('click', 'a', function(e){
 		var href = $(this).attr('href'),
 			link = href.replace(/(https?:\/\/)(.*)\/(.*)/, '$2');
 
