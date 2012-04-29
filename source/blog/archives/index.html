@@ -4,14 +4,20 @@ title: 文章彙整
 ---
 
 {% for post in site.posts reverse %}
-<section class="archive">
-	{% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+	{% capture date %}{{ post.date }}{% endcapture %}
+	{% capture this_year %}{{ date | date: "%Y" }}{% endcapture %}
 	{% unless year == this_year %}
 		{% assign year = this_year %}
-		<h1 class="archive-title">{{ year }}</h1>
+		{% unless forloop.first %}
+			</section>
+		{% endunless %}
+		<section class="archives"><div class="year">{{ date | date: "%y" }}</div>
 	{% endunless %}
-	<article class="archive">
-		{% include archive_post.html %}
+	<article>
+		<h1 class="title"><a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a></h1>
+		<footer>
+			<time datetime="{{ date | datetime | date_to_xmlschema }}">{{ date | date: "%b %e" }}</time>
+			<div class="tags">{{ post.categories | category_links }}</div>
+		</footer>
 	</article>
-</section>
 {% endfor %}
