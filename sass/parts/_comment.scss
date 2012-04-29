@@ -1,0 +1,29 @@
+#comment{
+	background: #fff;
+	border: 1px solid #ddd;
+	color: $color-font;
+	margin-bottom: 50px;
+	box-shadow: 0 0 16px rgba(0,0,0,0.3);
+	text-align: justify;
+	position: relative;
+	padding: 15px 20px;
+	@include border-radius(3px);
+	&:before{
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: $meta-width;
+		height: 100%;
+		background-color: #eee;
+		@include background(linear-gradient(left, #ddd, #fff));
+	}
+	.title{
+		font-family: $font-title;
+		font-weight: normal;
+	}
+	.title, #disqus_thread{
+		position: relative;
+		z-index: 1;
+	}
+}
