@@ -2,15 +2,14 @@
 layout: default
 ---
 
+<header id="archive-header">
+	<h1 class="alignleft">{{ page.title }}</h1>
+	<form action="{{ site.simple_search }}" class="search alignright" method="get">
+		<input type="text" name="q" results="0" placeholder="Search">
+		<input type="hidden" name="q" value="site:{{ site.url | shorthand_url }}">
+	</form>
+</header>
+
 {% for post in site.categories[page.category] %}
-<section class="archive">
-	{% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
-	{% unless year == this_year %}
-		{% assign year = this_year %}
-		<h1 class="archive-title">{{ year }}</h1>
-	{% endunless %}
-	<article class="archive">
-		{% include archive_post.html %}
-	</article>
-</section>
+	{% include archive_post.html %}
 {% endfor %}
