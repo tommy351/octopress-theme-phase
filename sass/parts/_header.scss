@@ -25,11 +25,16 @@
 	nav{
 		font: 1.5em $font-title;
 		line-height: 64 + 3*2px;
+		ul{
+			list-style: none;
+			li{
+				float: left;
+				width: 50%;
+			}
+		}
 		a{
 			color: #fff;
 			opacity: 0.7;
-			width: 50%;
-			@include inline-block;
 			@include transition(0.3s);
 			&:hover{
 				opacity: 1;
