@@ -34,7 +34,6 @@
 		left: 0;
 		width: $meta-width;
 		height: 100%;
-		background-color: #eee;
 		@include background(linear-gradient(left, #ddd, #fff));
 	}
 	.year{
