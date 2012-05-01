@@ -43,10 +43,6 @@
 		position: absolute;
 		top: 15px;
 		left: 20px;
-		&:after{
-			content: "′";
-			font-size: 0.9em;
-		}
 	}
 	article{
 		border-left: 1px solid $color-border;
