@@ -1,0 +1,46 @@
+.error{
+	background: #fff;
+	border: 1px solid #ddd;
+	color: $color-font;
+	box-shadow: 0 0 16px rgba(0,0,0,0.3);
+	text-align: center;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 600px;
+	height: 150px;
+	margin-left: -300px;
+	margin-top: -75px;
+	@include border-radius(3px);
+	header{
+		padding: 15px 20px;
+		@include background(linear-gradient(top, #ddd, #fff));
+		h1{
+			font-family: $font-title;
+			font-weight: normal;
+		}
+	}
+	.entry{
+		padding: 0 20px 15px;
+		p{
+			margin-top: 15px;
+			&:first-child{
+				margin-top: 0;
+			}
+		}
+		.back-home{
+			color: $color-meta;
+			display: block;
+			font: 0.9em $font-title;
+			margin-top: 30px;
+			&:before{
+				content: "\f060";
+				font-family: $font-icon;
+				padding-right: 10px;
+			}
+			&:hover{
+				color: $color-main01;
+			}
+		}
+	}
+}
