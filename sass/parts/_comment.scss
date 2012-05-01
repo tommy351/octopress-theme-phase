@@ -1,29 +1,150 @@
 #comment{
-	background: #fff;
-	border: 1px solid #ddd;
-	color: $color-font;
+	color: rgba(255,255,255,0.7);
 	margin-bottom: 50px;
-	box-shadow: 0 0 16px rgba(0,0,0,0.3);
-	text-align: justify;
-	position: relative;
-	padding: 15px 20px;
-	@include border-radius(3px);
-	&:before{
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: $meta-width;
-		height: 100%;
-		background-color: #eee;
-		@include background(linear-gradient(left, #ddd, #fff));
-	}
 	.title{
 		font-family: $font-title;
 		font-weight: normal;
+		line-height: 1em;
 	}
-	.title, #disqus_thread{
-		position: relative;
-		z-index: 1;
+	#dsq-content-stub{
+		margin-top: 30px;
+	}
+	#dsq-content{
+		#dsq-global-toolbar{
+			float: right;
+			margin: -47px 0 0;
+			.dsq-global-toolbar-right, .dsq-global-toolbar-left{
+				float: right;
+			}
+			.dsq-like-panel{
+				display: none;
+			}
+			.dsq-like-thread{
+				.dsq-toolbar-label{
+					display: none;
+				}
+			}
+		}
+		h3, #dsq-sort-by, #dsq-footer, .dsq-trackback-url{
+			display: none;
+		}
+		#dsq-account-dropdown{
+			float: none;
+			text-align: right;
+			margin-bottom: 1.5em;
+			a{
+				color: rgba(255,255,255,0.7);
+				&:hover{
+					color: #fff;
+				}
+			}
+		}
+		#dsq-pagination{
+			text-align: center;
+		}
+		.dsq-more-button{
+			background: $color-main01;
+			border: none;
+			color: #fff;
+			display: inline-block;
+			font: 1em $font-title;
+			font-weight: normal;
+			line-height: 15px;
+			opacity: 0.7;
+			margin: 0;
+			padding: 5px 15px;
+			text-shadow: none;
+			@include transition(0.3s);
+			@include border-radius(15px);
+			&:before{
+				content: "\f021";
+				font-family: $font-icon;
+				padding-right: 10px;
+			}
+			&:hover{
+				opacity: 1;
+			}
+			&:active{
+				box-shadow: none;
+				padding: 5px 15px;
+			}
+		}
+		#dsq-comments{
+			margin-top: 3em;
+		}
+		.dsq-comment{
+			color: $color-font;
+			.dsq-comment-body{
+				background: #fff;
+				border: 1px solid #ddd;
+				box-shadow: 0 0 16px rgba(0,0,0,0.3);
+				margin-left: 46px;
+				padding: 0;
+				@include border-radius(3px);
+			}
+			.dsq-comment-header{
+				border: none;
+				font-family: $font-title;
+				margin: 0;
+				padding: 15px 20px;
+				@include background(linear-gradient(top, #ddd, #fff));
+				a{
+					color: $color-font;
+				}
+				.dsq-commenter-name{
+					font-size: 1.5em;
+					font-weight: normal;
+					line-height: 1;
+				}
+				.dsq-commenter-bio{
+					color: $color-meta;
+					font-size: 0.9em;
+					opacity: 1;
+				}
+				.dsq-collapse-toggle{
+					top: 12px;
+					right: 20px;
+				}
+			}
+			.dsq-comment-message{
+				margin: 0;
+				padding: 0 20px;
+				.dsq-comment-text{
+					p{
+						margin: 15px 0 0 !important;
+						&:first-child{
+							margin-top: 0 !important;
+						}
+					}
+					a{
+						&:hover{
+							text-decoration: underline;
+						}
+					}
+				}
+			}
+			.dsq-media-embed{
+				margin-bottom: 0;
+				padding: 15px 20px 0;
+				h4{
+					display: none;
+				}
+			}
+			.dsq-comment-footer{
+				padding: 15px 20px;
+				li{
+					font-size: 0.9em;
+				}
+				.dsq-comment-actions{
+					li{
+						margin: 0 0 0 12px;
+					}
+				}
+				a{
+					color: $color-meta;
+					opacity: 1;
+				}
+			}
+		}
 	}
 }
