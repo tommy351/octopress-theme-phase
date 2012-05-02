@@ -23,14 +23,13 @@
 	if (foreground.getContext){
 		var bctx = background.getContext('2d'),
 			fctx = foreground.getContext('2d'),
-			wWidth = document.documentElement.clientWidth,
-			wHeight = document.documentElement.clientHeight,
 			degree = config.angle/360*Math.PI*2,
-			circles = lines = timer = [];
+			circles = lines = timer = [],
+			wWidth, wHeight;
 
 		var setCanvasHeight = function(){
-			wWidth = document.documentElement.clientWidth;
-			wHeight = document.documentElement.clientHeight,
+			wWidth = $(window).width();
+			wHeight = $(window).height(),
 
 			background.width = wWidth;
 			background.height = wHeight;
