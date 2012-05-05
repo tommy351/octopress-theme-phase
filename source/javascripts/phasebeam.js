@@ -3,9 +3,8 @@
 		background = canvas[0],
 		foreground = canvas[1],
 		config = {
-			fps: 16,
 			circle: {
-				amount: 24,
+				amount: 18,
 				layer: 3,
 				color: [157, 97, 207],
 				alpha: 0.3
@@ -16,16 +15,24 @@
 				color: [255, 255, 255],
 				alpha: 0.3
 			},
-			speed: 1,
+			speed: 0.5,
 			angle: 20
 		};
 
 	if (foreground.getContext){
 		var bctx = background.getContext('2d'),
 			fctx = foreground.getContext('2d'),
-			degree = config.angle/360*Math.PI*2,
+			M = window.Math, // Cached Math
+			degree = config.angle/360*M.PI*2,
 			circles = lines = timer = [],
-			wWidth, wHeight;
+			wWidth, wHeight, lastTime;
+		
+		requestAnimationFrame = window.requestAnimationFrame || 
+			window.mozRequestAnimationFrame ||
+			window.webkitRequestAnimationFrame ||
+			window.msRequestAnimationFrame ||
+			window.oRequestAnimationFrame ||
+			function(callback) { setTimeout(callback, 1000 / 60); };
 
 		var setCanvasHeight = function(){
 			wWidth = $(window).width();
@@ -43,14 +50,14 @@
 			gradient.addColorStop(1, 'rgba('+color[0]+','+color[1]+','+color[2]+','+(alpha-0.1)+')');
 
 			fctx.beginPath();
-			fctx.arc(x, y, radius, 0, Math.PI*2, true);
+			fctx.arc(x, y, radius, 0, M.PI*2, true);
 			fctx.fillStyle = gradient;
 			fctx.fill();
 		};
 
 		var drawLine = function(x, y, width, color, alpha){
-			var endX = x+Math.sin(degree)*width,
-				endY = y-Math.cos(degree)*width,
+			var endX = x+M.sin(degree)*width,
+				endY = y-M.cos(degree)*width,
 				gradient = fctx.createLinearGradient(x, y, endX, endY);
 			gradient.addColorStop(0, 'rgba('+color[0]+','+color[1]+','+color[2]+','+alpha+')');
 			gradient.addColorStop(1, 'rgba('+color[0]+','+color[1]+','+color[2]+','+(alpha-0.1)+')');
@@ -99,55 +106,74 @@
 		};
 
 		var animate = function(){
+			var sin = M.sin(degree),
+				cos = M.cos(degree);
+
 			fctx.clearRect(0, 0, wWidth, wHeight);
 			if (config.circle.amount > 0 && config.circle.layer > 0){
-				for (var i=0; i<circles.length; i++){
-					var item = circles[i];
-					if (item.x > wWidth + item.radius){
-						item.x = -item.radius;
-					} else if (item.x < -item.radius){
-						item.x = wWidth + item.radius
+				for (var i=0, len = circles.length; i<len; i++){
+					var item = circles[i],
+						x = item.x,
+						y = item.y,
+						radius = item.radius,
+						speed = item.speed;
+
+					if (x > wWidth + radius){
+						x = -radius;
+					} else if (x < -radius){
+						x = wWidth + radius
 					} else {
-						item.x = item.x+Math.sin(degree)*item.speed;
+						x += sin*speed;
 					}
 
-					if (item.y > wHeight + item.radius){
-						item.y = -item.radius;
-					} else if (item.y < -item.radius){
-						item.y = wHeight + item.radius;
+					if (y > wHeight + radius){
+						y = -radius;
+					} else if (y < -radius){
+						y = wHeight + radius;
 					} else {
-						item.y = item.y-Math.cos(degree)*item.speed;
+						y -= cos*speed;
 					}
 
-					drawCircle(item.x, item.y, item.radius, item.color, item.alpha);
+					item.x = x;
+					item.y = y;
+					drawCircle(x, y, radius, item.color, item.alpha);
 				}
 			}
 
 			if (config.line.amount > 0 && config.line.layer > 0){
-				for (var j=0; j<lines.length; j++){
-					var item = lines[j];
-					if (item.x > wWidth + item.width * Math.sin(degree)){
-						item.x = -item.width * Math.sin(degree);
-					} else if (item.x < -item.width * Math.sin(degree)){
-						item.x = wWidth + item.width * Math.sin(degree);
+				for (var j=0, len = lines.length; j<len; j++){
+					var item = lines[j],
+						x = item.x,
+						y = item.y,
+						width = item.width,
+						speed = item.speed;
+
+					if (x > wWidth + width * sin){
+						x = -width * sin;
+					} else if (x < -width * sin){
+						x = wWidth + width * sin;
 					} else {
-						item.x = item.x+Math.sin(degree)*item.speed;
+						x += sin*speed;
 					}
 
-					if (item.y > wHeight + item.width * Math.cos(degree)){
-						item.y = -item.width * Math.cos(degree);
-					} else if (item.y < -item.width * Math.cos(degree)){
-						item.y = wHeight + item.width * Math.cos(degree);
+					if (y > wHeight + width * cos){
+						y = -width * cos;
+					} else if (y < -width * cos){
+						y = wHeight + width * cos;
 					} else {
-						item.y = item.y-Math.cos(degree)*item.speed;
+						y -= cos*speed;
 					}
 					
-					drawLine(item.x, item.y, item.width, item.color, item.alpha);
+					item.x = x;
+					item.y = y;
+					drawLine(x, y, width, item.color, item.alpha);
 				}
 			}
+
+			requestAnimationFrame(animate);
 		};
 
-		var draw = function(){
+		var createItem = function(){
 			circles = [];
 			lines = [];
 
@@ -155,11 +181,11 @@
 				for (var i=0; i<config.circle.amount/config.circle.layer; i++){
 					for (var j=0; j<config.circle.layer; j++){
 						circles.push({
-							x: Math.random() * wWidth,
-							y: Math.random() * wHeight,
-							radius: Math.random()*(20+j*5)+(20+j*5),
+							x: M.random() * wWidth,
+							y: M.random() * wHeight,
+							radius: M.random()*(20+j*5)+(20+j*5),
 							color: config.circle.color,
-							alpha: Math.random()*0.2+(config.circle.alpha-j*0.1),
+							alpha: M.random()*0.2+(config.circle.alpha-j*0.1),
 							speed: config.speed*(1+j*0.5)
 						});
 					}
@@ -170,30 +196,29 @@
 				for (var m=0; m<config.line.amount/config.line.layer; m++){
 					for (var n=0; n<config.line.layer; n++){
 						lines.push({
-							x: Math.random() * wWidth,
-							y: Math.random() * wHeight,
-							width: Math.random()*(20+n*5)+(20+n*5),
+							x: M.random() * wWidth,
+							y: M.random() * wHeight,
+							width: M.random()*(20+n*5)+(20+n*5),
 							color: config.line.color,
-							alpha: Math.random()*0.2+(config.line.alpha-n*0.1),
+							alpha: M.random()*0.2+(config.line.alpha-n*0.1),
 							speed: config.speed*(1+n*0.5)
 						});
 					}
 				}
 			}
 
-			clearInterval(timer[0]);
-			timer[0] = setInterval(animate, 1000 / config.fps);
+			requestAnimationFrame(animate);
 			drawBack();
 		};
 
 		$(document).ready(function(){
 			setCanvasHeight();
-			draw();
+			createItem();
 		});
 		$(window).resize(function(){
 			setCanvasHeight();
 			clearTimeout(timer[1]);
-			timer[1] = setTimeout(draw, 500);
+			timer[1] = setTimeout(createItem, 500);
 		});
 	}
 })(jQuery);
