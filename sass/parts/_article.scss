@@ -18,7 +18,7 @@ $meta-width: 120px;
 		height: 100%;
 		@include background(linear-gradient(left, #ddd, #fff));
 	}
-	header, .entry{
+	header, .entry-content{
 		border-left: 1px solid $color-border;
 		margin-left: $meta-width + 20*2px;
 	}
@@ -50,7 +50,7 @@ $meta-width: 120px;
 			}
 		}
 	}
-	.entry{
+	.entry-content{
 		line-height: 1.6;
 		padding: 15px 20px 15px;
 		margin-top: -15px;
