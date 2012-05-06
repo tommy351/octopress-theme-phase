@@ -1,7 +1,8 @@
 (function($){
 	var canvas = $('#phasebeam').children('canvas'),
 		background = canvas[0],
-		foreground = canvas[1],
+		foreground1 = canvas[1],
+		foreground2 = canvas[2],
 		config = {
 			circle: {
 				amount: 18,
@@ -19,9 +20,10 @@
 			angle: 20
 		};
 
-	if (foreground.getContext){
+	if (background.getContext){
 		var bctx = background.getContext('2d'),
-			fctx = foreground.getContext('2d'),
+			fctx1 = foreground1.getContext('2d'),
+			fctx2 = foreground2.getContext('2d'),
 			M = window.Math, // Cached Math
 			degree = config.angle/360*M.PI*2,
 			circles = lines = timer = [],
@@ -38,37 +40,37 @@
 			wWidth = $(window).width();
 			wHeight = $(window).height(),
 
-			background.width = wWidth;
-			background.height = wHeight;
-			foreground.width = wWidth;
-			foreground.height = wHeight;
+			canvas.each(function(){
+				this.width = wWidth;
+				this.height = wHeight;
+			});
 		};
 
 		var drawCircle = function(x, y, radius, color, alpha){
-			var gradient = fctx.createRadialGradient(x, y, radius, x, y, 0);
+			var gradient = fctx1.createRadialGradient(x, y, radius, x, y, 0);
 			gradient.addColorStop(0, 'rgba('+color[0]+','+color[1]+','+color[2]+','+alpha+')');
 			gradient.addColorStop(1, 'rgba('+color[0]+','+color[1]+','+color[2]+','+(alpha-0.1)+')');
 
-			fctx.beginPath();
-			fctx.arc(x, y, radius, 0, M.PI*2, true);
-			fctx.fillStyle = gradient;
-			fctx.fill();
+			fctx1.beginPath();
+			fctx1.arc(x, y, radius, 0, M.PI*2, true);
+			fctx1.fillStyle = gradient;
+			fctx1.fill();
 		};
 
 		var drawLine = function(x, y, width, color, alpha){
 			var endX = x+M.sin(degree)*width,
 				endY = y-M.cos(degree)*width,
-				gradient = fctx.createLinearGradient(x, y, endX, endY);
+				gradient = fctx2.createLinearGradient(x, y, endX, endY);
 			gradient.addColorStop(0, 'rgba('+color[0]+','+color[1]+','+color[2]+','+alpha+')');
 			gradient.addColorStop(1, 'rgba('+color[0]+','+color[1]+','+color[2]+','+(alpha-0.1)+')');
 
-			fctx.beginPath();
-			fctx.moveTo(x, y);
-			fctx.lineTo(endX, endY);
-			fctx.lineWidth = 3;
-			fctx.lineCap = 'round';
-			fctx.strokeStyle = gradient;
-			fctx.stroke();
+			fctx2.beginPath();
+			fctx2.moveTo(x, y);
+			fctx2.lineTo(endX, endY);
+			fctx2.lineWidth = 3;
+			fctx2.lineCap = 'round';
+			fctx2.strokeStyle = gradient;
+			fctx2.stroke();
 		};
 
 		var drawBack = function(){
@@ -109,8 +111,8 @@
 			var sin = M.sin(degree),
 				cos = M.cos(degree);
 
-			fctx.clearRect(0, 0, wWidth, wHeight);
 			if (config.circle.amount > 0 && config.circle.layer > 0){
+				fctx1.clearRect(0, 0, wWidth, wHeight);
 				for (var i=0, len = circles.length; i<len; i++){
 					var item = circles[i],
 						x = item.x,
@@ -141,6 +143,7 @@
 			}
 
 			if (config.line.amount > 0 && config.line.layer > 0){
+				fctx2.clearRect(0, 0, wWidth, wHeight);
 				for (var j=0, len = lines.length; j<len; j++){
 					var item = lines[j],
 						x = item.x,
