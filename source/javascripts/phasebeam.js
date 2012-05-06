@@ -26,15 +26,23 @@
 			fctx2 = foreground2.getContext('2d'),
 			M = window.Math, // Cached Math
 			degree = config.angle/360*M.PI*2,
-			circles = lines = timer = [],
-			wWidth, wHeight, lastTime;
+			circles = [],
+			lines = [],
+			wWidth, wHeight, timer;
 		
 		requestAnimationFrame = window.requestAnimationFrame || 
 			window.mozRequestAnimationFrame ||
 			window.webkitRequestAnimationFrame ||
 			window.msRequestAnimationFrame ||
 			window.oRequestAnimationFrame ||
-			function(callback) { setTimeout(callback, 1000 / 60); };
+			function(callback, element) { setTimeout(callback, 1000 / 60); };
+
+		cancelAnimationFrame = window.cancelAnimationFrame ||
+			window.mozCancelAnimationFrame ||
+			window.webkitCancelAnimationFrame ||
+			window.msCancelAnimationFrame ||
+			window.oCancelAnimationFrame ||
+			clearTimeout;
 
 		var setCanvasHeight = function(){
 			wWidth = $(window).width();
@@ -173,7 +181,7 @@
 				}
 			}
 
-			requestAnimationFrame(animate);
+			timer = requestAnimationFrame(animate);
 		};
 
 		var createItem = function(){
@@ -210,7 +218,8 @@
 				}
 			}
 
-			requestAnimationFrame(animate);
+			cancelAnimationFrame(timer);
+			timer = requestAnimationFrame(animate);
 			drawBack();
 		};
 
@@ -220,8 +229,7 @@
 		});
 		$(window).resize(function(){
 			setCanvasHeight();
-			clearTimeout(timer[1]);
-			timer[1] = setTimeout(createItem, 500);
+			createItem();
 		});
 	}
 })(jQuery);
