@@ -1,27 +1,6 @@
 #header{
 	height: 64 + 3*2px;
 	padding: 50px 0;
-	h1{
-		position: relative;
-		width: 100%;
-		a{
-			background: image-url("logo.png") center no-repeat $color-main01;
-			border: 3px solid #fff;
-			display: block;
-			opacity: 0.7;
-			position: absolute;
-			left: 50%;
-			margin-left: -35px;
-			width: 64px;
-			height: 64px;
-			@include hide-text;
-			@include border-radius(50%);
-			@include transition(0.3s);
-			&:hover{
-				opacity: 1;
-			}
-		}
-	}
 	nav{
 		font: 1.5em $font-title;
 		line-height: 64 + 3*2px;
@@ -41,7 +20,7 @@
 			}
 		}
 		.alignleft, .alignright{
-			width: 465px;
+			width: 50%;
 		}
 		.alignleft{
 			text-align: left;
