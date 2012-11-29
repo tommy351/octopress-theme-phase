@@ -67,7 +67,7 @@ $meta-width: 120px;
       background: #fff;
       @include transform(rotate(45deg));
     }
-    footer{
+    .meta{
       color: $color-meta;
       font-size: 0.9em;
       position: absolute;
@@ -146,20 +146,22 @@ $meta-width: 120px;
     blockquote{
       border-top: 1px solid lighten($color-border, 10%);
       border-bottom: 1px solid lighten($color-border, 10%);
-      color: lighten($color-font, 30%);
+      color: #666;
       font-style: italic;
-      padding: 25px;
+      font-size: 1.2em;
+      font-family: $font-serif;
+      padding: 10px 25px 25px;
       position: relative;
       text-align: center;
       &:before, &:after{
         position: absolute;
-        color: lighten($color-border, 10%);
+        color: $color-border;
         line-height: 1;
         font-size: 50px;
       }
       &:before{
         content: "“";
-        top: 0;
+        top: 3px;
         left: 0;
       }
       &:after{
@@ -167,8 +169,25 @@ $meta-width: 120px;
         bottom: 8px;
         right: 0;
       }
-      & > p:first-of-type{
-        margin-top: 0;
+      footer{
+        font-size: 0.8em;
+        color: $color-meta;
+        line-height: 1.1;
+        margin-top: 20px;
+        cite{
+          &:before{
+            content: "—";
+            color: #ccc;
+            padding: 0 0.5em;
+          }
+        }
+        a{
+          color: $color-meta;
+          text-decoration: underline;
+          &:hover{
+            color: $color-font;
+          }
+        }
       }
     }
     iframe{
