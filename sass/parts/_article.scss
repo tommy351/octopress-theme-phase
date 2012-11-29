@@ -75,7 +75,6 @@ $meta-width: 120px;
 			left: -$meta-width - 20px;
 			width: $meta-width;
 			z-index: 1;
-			@include user-select(none);
 			a{
 				color: $color-meta;
 				display: block;
