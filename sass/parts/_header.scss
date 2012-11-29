@@ -1,32 +1,25 @@
+$nav-height: 64 + 3*2px;
+
 #header{
-	height: 64 + 3*2px;
+	height: $nav-height;
 	padding: 50px 0;
 	nav{
 		font: 1.5em $font-title;
-		line-height: 64 + 3*2px;
+		line-height: $nav-height;
 		ul{
 			list-style: none;
+			text-align: center;
 			li{
-				float: left;
-				width: 50%;
+				margin: 0 50px;
 			}
-		}
-		a{
-			color: #fff;
-			opacity: 0.7;
-			@include transition(0.3s);
-			&:hover{
-				opacity: 1;
+			a{
+				color: #fff;
+				opacity: 0.7;
+				@include transition(0.3s);
+				&:hover{
+					opacity: 1;
+				}
 			}
-		}
-		.alignleft, .alignright{
-			width: 50%;
-		}
-		.alignleft{
-			text-align: left;
-		}
-		.alignright{
-			text-align: right;
 		}
 	}
 }
