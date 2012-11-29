@@ -6,10 +6,12 @@ Feel the flow of time with Phase, the most beautiful theme for [Octopress](http:
 
 Execute the following code in terminal.
 
-  $ cd octopress
-  $ git clone git://github.com/tommy351/octopress-theme-phase.git .themes/phase
-  $ rake install['phase']
-  $ rake generate
+```
+$ cd octopress
+$ git clone git://github.com/tommy351/octopress-theme-phase.git .themes/phase
+$ rake install['phase']
+$ rake generate
+```
 
 Try `rake install\['phase'\]` instead if you have problems with zsh.
 
