@@ -9,8 +9,6 @@
 <div class="entry-content">
   {% if index %}
     {{ content | excerpt }}
-    {% capture excerpted %}{{ content | has_excerpt }}{% endcapture %}
-    {% if excerpted == 'true' %}<a rel="nofollow" href="{{ root_url }}{{ post.url }}" class="more-link">{{ site.excerpt_link }}</a>{% endif %}
   {% else %}
     {{ content }}
     {% unless index %}

@@ -67,23 +67,6 @@ $meta-width: 120px;
 			background: #fff;
 			@include transform(rotate(45deg));
 		}
-		.more-link{
-			color: $color-meta;
-			font-size: 0.9em;
-			position: absolute;
-			left: -$meta-width - 20px;
-			bottom: 15px;
-			@include user-select(none);
-			&:before{
-				content: "\f061";
-				font-family: $font-icon;
-				padding-right: 10px;
-			}
-			&:hover{
-				text-decoration: none;
-				color: $color-main01;
-			}
-		}
 		footer{
 			color: $color-meta;
 			font-size: 0.9em;
