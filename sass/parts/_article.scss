@@ -1,6 +1,6 @@
 $meta-width: 120px;
 
-.post{
+article{
   background: #fff;
   border: 1px solid #ddd;
   color: $color-font;
@@ -9,19 +9,6 @@ $meta-width: 120px;
   text-align: justify;
   position: relative;
   @include border-radius(3px);
-  &:before{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: $meta-width;
-    height: 100%;
-    @include background(linear-gradient(left, #ddd, #fff));
-  }
-  header, .entry-content{
-    border-left: 1px solid $color-border;
-    margin-left: $meta-width + 20*2px;
-  }
   header{
     font-family: $font-title;
     padding: 15px 20px;
@@ -54,59 +41,6 @@ $meta-width: 120px;
     line-height: 1.6;
     padding: 15px 20px 15px;
     margin-top: -15px;
-    min-height: 130px;
-    position: relative;
-    &:before{
-      content: "";
-      position: absolute;
-      top: 15px;
-      left: -5px;
-      width: 7px;
-      height: 7px;
-      border: 1px solid $color-border;
-      background: #fff;
-      @include transform(rotate(45deg));
-    }
-    .meta{
-      color: $color-meta;
-      font-size: 0.9em;
-      position: absolute;
-      top: 30px;
-      left: -$meta-width - 20px;
-      width: $meta-width;
-      z-index: 1;
-      a{
-        color: $color-meta;
-        display: block;
-        &:hover{
-          color: darken($color-meta, 20%);
-        }
-      }
-      .tags{
-        line-height: 1.6em;
-        a{
-          &:before{
-            content: "\f02b";
-            font-family: $font-icon;
-            padding-right: 10px;
-          }
-          &:hover{
-            text-decoration: none;
-          }
-        }
-      }
-      .comment{
-        margin-top: 20px;
-        &:before{
-          content: "\f075";
-          font-family: $font-icon;
-          padding-right: 8px;
-        }
-        &:hover{
-          text-decoration: none;
-        }
-      }
-    }
     p, blockquote, ul, ol, dl, table, iframe, h1, h2, .video-container, .sharing{
       margin-top: 15px;
     }
@@ -253,5 +187,88 @@ $meta-width: 120px;
       float: left;
       margin: 0.5em 1.5em 1em 0;
     }
+  }
+}
+
+.post{
+  &:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $meta-width;
+    height: 100%;
+    @include background(linear-gradient(left, #ddd, #fff));
+  }
+  header, .entry-content{
+    border-left: 1px solid $color-border;
+    margin-left: $meta-width + 20*2px;
+  }
+  .entry-content{
+    min-height: 130px;
+    position: relative;
+    &:before{
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: -5px;
+      width: 7px;
+      height: 7px;
+      border: 1px solid $color-border;
+      background: #fff;
+      @include transform(rotate(45deg));
+    }
+    .meta{
+      color: $color-meta;
+      font-size: 0.9em;
+      position: absolute;
+      top: 30px;
+      left: -$meta-width - 20px;
+      width: $meta-width;
+      z-index: 1;
+      a{
+        color: $color-meta;
+        display: block;
+        &:hover{
+          color: darken($color-meta, 20%);
+        }
+      }
+      .tags{
+        line-height: 1.6em;
+        a{
+          &:before{
+            content: "\f02b";
+            font-family: $font-icon;
+            padding-right: 10px;
+          }
+          &:hover{
+            text-decoration: none;
+          }
+        }
+      }
+      .comment{
+        margin-top: 20px;
+        &:before{
+          content: "\f075";
+          font-family: $font-icon;
+          padding-right: 8px;
+        }
+        &:hover{
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+.page{
+  &:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    @include background(linear-gradient(top, #ddd, #fff));
   }
 }

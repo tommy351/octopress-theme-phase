@@ -4,7 +4,7 @@
   {% else %}
   <h1 class="title">{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
   {% endif %}
-  {% include post/date.html %}
+  {% if post or page.single %}{% include post/date.html %}{% endif %}
 </header>
 <div class="entry-content">
   {% if index %}
@@ -15,6 +15,7 @@
       {% include post/sharing.html %}
     {% endunless %}
   {% endif %}
+  {% if post or page.single %}
   <footer class="meta">
     {% include post/categories.html %}
     {% if site.disqus_short_name and site.disqus_show_comment_count == true %}
@@ -26,5 +27,6 @@
       {% endif %}
     {% endif %}
   </footer>
+  {% endif %}
 </div>
 {% include post/comment.html %}
